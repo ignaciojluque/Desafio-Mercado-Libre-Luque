@@ -11,8 +11,8 @@ from oauth2client.file import Storage
 
 app = flask.Flask(__name__)
 
-@app.route('/search-in-doc/<palabra>/<ident>',methods=['GET']) 
-def index(palabra,identificacion):# funcion que busca una palabra en en el documento indicado(ambos pasados por parametro)
+@app.route('/search-in-doc/<palabra>/<ident>/',methods=['GET']) 
+def index(palabra,ident):# funcion que busca una palabra en en el documento indicado(ambos pasados por parametro)
     credentials = get_credentials() #se obtienen credenciales para usar apis de google
     if credentials == False:
 		return flask.redirect(flask.url_for('oauth2callback'))# se debe ingresar en la cuenta de google drive
@@ -41,7 +41,9 @@ def crear_doc(titulo,descripcion):
 	service = discovery.build('drive', 'v3', http=http)
 	file = service.files().create(body=file_metadata, # se crea el documento con los datos pasados por parametro
                                     fields='id').execute()
-	return "El id es: {!s},  el titulo del documento es: {!s},  descripcion: {!s}".format(file.get('id'),titulo, descripcion)
+	if file is None:
+		return "HTTP/1.1 500"
+	return "HTTP/1.1 200 OK \n El id es: {!s},  el titulo del documento es: {!s},  descripcion: {!s}".format(file.get('id'),titulo, descripcion)
 
 
 @app.route('/oauth2callback')
