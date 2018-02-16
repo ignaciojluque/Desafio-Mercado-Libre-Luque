@@ -30,4 +30,10 @@ Luego abrimos cualquier navegador web y escribimos la siguiente linea, reemplaza
 
 Nota: en caso de no saber cual es el ID del documento deseado, se imprime por terminal el nombre de cada archivo y abajo su ID asociado.
 ##  Crear un documento de GDrive
-Para poder eje
+Para poder ejecutar esta función primero necesitamos descargar todos los archivos y descomprimirlos en una carpeta. Luego ejecutamos en un terminal la siguiente línea (posicionados en la carpeta donde descomprimimos los archivos):
+
+`FLASK_APP=desafioML.py flask run`
+
+Luego se ejecuta en el navegador se pone la siguiente linea, reemplazando respectivamente :
+
+`http://localhost:5000/crear/<Titulo_del_doc>/<Descripcion>/`
