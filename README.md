@@ -4,7 +4,7 @@ En este trabajo se creó una API que puede realizar 2 funciones:
 * Buscar una palabra en un documento de Google Drive
 * Crear un documento de Google Drive 
 
-Para ello se utiliza la api de Google drive. Para poder hacer uso de la misma se utiliza credenciales de desarrollador,  razón por la cual existe el archivo "client_id.json".
+Para ello se utiliza la api de Google drive. Para poder hacer uso de la misma se utiliza credenciales de desarrollador,  razón por la cual existen los archivos "client_id.json" "credentials.json".
 
 
 
