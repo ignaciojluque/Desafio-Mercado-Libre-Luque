@@ -11,9 +11,8 @@ from oauth2client.file import Storage
 
 app = flask.Flask(__name__)
 
-
 @app.route('/search-in-doc/<palabra>/<ident>',methods=['GET']) 
-def index(palabra,ident):# funcion que busca una palabra en en el documento indicado(ambos pasados por parametro)
+def index(palabra,identificacion):# funcion que busca una palabra en en el documento indicado(ambos pasados por parametro)
     credentials = get_credentials() #se obtienen credenciales para usar apis de google
     if credentials == False:
 		return flask.redirect(flask.url_for('oauth2callback'))# se debe ingresar en la cuenta de google drive
@@ -23,7 +22,8 @@ def index(palabra,ident):# funcion que busca una palabra en en el documento indi
 		all_files = fetch( "fullText contains '%s'"% palabra, sort='modifiedTime desc')# se buscan todos los archivos que contengan la palabra pasada por parametro
 		for file in all_files:
 			ide = file['id']
-			print(ide) # se imprimen por consola las id de los documentos para conocerlas (solo para el caso en que no se conozca la id previamente)
+			print(file['name']) 
+			print(file['id'])# se imprimen por consola las id de los documentos para conocerlas (solo para el caso en que no se conozca la id previamente)
 			if ident == ide: # nos quedamos con el documento que tenga la ID pasada por parametro
 				return "HTTP/1.1 200 OK"
 		return "HTTP/1.1 404 Not Found" # si llego hasta aca es porque no se encontro el documento
