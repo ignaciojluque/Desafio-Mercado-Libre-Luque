@@ -67,10 +67,10 @@ def get_credentials():
 	store = Storage(credential_path)
 	credentials = store.get()
 	if not credentials or credentials.invalid:
-		print("Credentials not found.")
+		print("Credentials no encontradas.")
 		return False
 	else:
-		print("Credentials fetched successfully.")
+		print("credenciales encontradas con exito.")
 		return credentials
 
 def fetch(query, sort='modifiedTime desc'):
@@ -84,7 +84,7 @@ def fetch(query, sort='modifiedTime desc'):
 	
 if __name__ == '__main__':
 	if os.path.exists('client_id.json') == False:
-		print('Client secrets file (client_id.json) not found in the app path.')
+		print('archivo secreto del cliente (client_id.json) no encontrado.')
 		exit()
 	import uuid
 	app.secret_key = str(uuid.uuid4())
