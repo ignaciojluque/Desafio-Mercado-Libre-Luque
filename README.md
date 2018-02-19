@@ -13,7 +13,7 @@ Para ello se utiliza la api de Google drive. Para poder hacer uso de la misma se
 * Tener python 2.7 o python 3
 * Tener una cuenta de Google Drive activa
 * Descargar pip: `sudo apt-get install python-pip` 
-* Descargar Flask: `sudo apt-get install python-flask`
+* Descargar Flask: `sudo pip install Flask`
 * Descargar google-api-python-client: `pip install --upgrade google-api-python-client`
 
 
@@ -26,7 +26,9 @@ Para poder ejecutar esta función primero necesitamos descargar todos los archiv
 Entonces habremos levantado un servidor en localhost:5000 .
 Luego abrimos cualquier navegador web y escribimos la siguiente linea, reemplazando según corresponda:
 
-`http://localhost:5000/search-in-doc/<PALABRA_A_BUSCAR>/<ID>`
+`http://localhost:5000/search-in-doc/<ID>?word=<PALABRA_A_BUSCAR>`
+
+En caso de no encontrar la palabra se recibirá "HTTP/1.1 404 Not Found" en caso satisfactorio se recibirá "HTTP/1.1 200 Ok"
 
 Nota: en caso de no saber cual es el ID del documento deseado, se imprime por terminal el nombre de cada archivo y abajo su ID asociado.
 ##  Crear un documento de GDrive
@@ -34,6 +36,14 @@ Para poder ejecutar esta función primero necesitamos descargar todos los archiv
 
 `FLASK_APP=desafioML.py flask run`
 
-Luego se ejecuta en el navegador se pone la siguiente linea, reemplazando respectivamente :
+Luego se deberá mandar en el body request de una peticion HTTP POST a la siguiente URL:
 
-`http://localhost:5000/crear/<Titulo_del_doc>/<Descripcion>/`
+`http://localhost:5000/crear/`
+
+un archivo .json que tenga este formato:
+
+`{“titulo”:”mi_titulo”, “descripcion”:”mi_descripcion”}` 
+
+
+
+
