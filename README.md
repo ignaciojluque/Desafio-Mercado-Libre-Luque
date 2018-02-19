@@ -38,7 +38,7 @@ Para poder ejecutar esta función primero necesitamos descargar todos los archiv
 
 Luego se deberá mandar a la siguiente URL:
 
-`http://localhost:5000/crear/`
+`http://localhost:5000/crear-doc/`
 
 un archivo .json que tenga este formato(a través de una petición HTTP POST):
 

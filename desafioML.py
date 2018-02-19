@@ -35,15 +35,23 @@ def index(ident):# funcion que busca una palabra en en el documento indicado(amb
 
 @app.route('/crear-doc/', methods=['GET', 'POST'])
 def crear_doc():
-	file_metadata = request.get_json()	
-	titulo = file_metadata.get("titulo")
-	descripcion = file_metadata.get("descripcion")
+	json_recibido = request.get_json()	
+	titulo = json_recibido.get("titulo")
+	descripcion = json_recibido.get("descripcion")
 	
-	if file_metadata is None or titulo is None or descripcion is None:# si no se recibio el archivo json o los parametros titulo y descripcion son nulos , entonces devuelve error 400
+	if json_recibido is None or titulo is None or descripcion is None:# si no se recibio el archivo json o los parametros titulo y descripcion son nulos , entonces devuelve error 400
 		return "HTTP/1.1 400"
 	credentials = get_credentials()
 	http = credentials.authorize(httplib2.Http())
 	service = discovery.build('drive', 'v3', http=http)
+
+	file_metadata = {
+    'name': titulo,
+	'description':  descripcion,   
+	'mimeType': 'application/vnd.google-apps.document'
+	}
+
+
 	file = service.files().create(body=file_metadata, # se crea el documento con los datos pasados por parametro
                                     fields='id').execute()
 	
