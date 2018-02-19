@@ -38,13 +38,11 @@ def crear_doc():
 	json_recibido = request.get_json()	
 	titulo = json_recibido.get("titulo")
 	descripcion = json_recibido.get("descripcion")
-	
-	if json_recibido is None or titulo is None or descripcion is None:# si no se recibio el archivo json o los parametros titulo y descripcion son nulos , entonces devuelve error 400
+	if (json_recibido is None) or (titulo is None) or (descripcion is None):# si no se recibio el archivo json o los parametros titulo y descripcion son nulos , entonces devuelve error 400			
 		return "HTTP/1.1 400"
 	credentials = get_credentials()
 	http = credentials.authorize(httplib2.Http())
-	service = discovery.build('drive', 'v3', http=http)
-
+	service = discovery.build('drive', 'v3', http=http)	
 	file_metadata = {
     'name': titulo,
 	'description':  descripcion,   
