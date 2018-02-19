@@ -49,4 +49,12 @@ Las posibles respuestas serán:
 * "HTTP/1.1 500" , en caso de no poder crear el archivo en Google Drive.
 * "HTTP/1.1 200 OK" , si todo funciono satisfactoriamente.
 
+## Pruebas Unitarias
+Para poder ejecutar las pruebas unitarias es necesario instalar la librería requests:
+
+`pip install requests`
+
+Luego ejecutando la siguiente linea en el terminal se verán los resultados de las pruebas:
+
+`python pruebas_unitarias.py`
 
