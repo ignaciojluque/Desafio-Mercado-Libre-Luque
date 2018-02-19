@@ -45,8 +45,8 @@ un archivo .json que tenga este formato(a través de una petición HTTP POST):
 `{“titulo”:”mi_titulo”, “descripcion”:”mi_descripcion”}` 
 
 Las posibles respuestas serán:
-*"HTTP/1.1 400" , en caso de haber un error en el archivo .json o en el formato de los parámetros.
-*"HTTP/1.1 500" , en caso de no poder crear el archivo en Google Drive.
-*"HTTP/1.1 200 OK" , si todo funciono satisfactoriamente.
+* "HTTP/1.1 400" , en caso de haber un error en el archivo .json o en el formato de los parámetros.
+* "HTTP/1.1 500" , en caso de no poder crear el archivo en Google Drive.
+* "HTTP/1.1 200 OK" , si todo funciono satisfactoriamente.
 
 
