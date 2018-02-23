@@ -3,7 +3,7 @@
 import json
 import os
 import flask
-from flask import request, jsonify
+from flask import request, jsonify, make_response
 import httplib2
 from apiclient import discovery
 from apiclient.http import MediaIoBaseDownload, MediaFileUpload
@@ -30,17 +30,23 @@ def index(ident):# funcion que busca una palabra en en el documento indicado(amb
 			print(file['name']) 
 			print(file['id'])# se imprimen por consola las id de los documentos para conocerlas (solo para el caso en que no se conozca la id previamente)
 			if ident == ide: # nos quedamos con el documento que tenga la ID pasada por parametro
-				return "HTTP/1.1 200 OK"
-		return "HTTP/1.1 404 Not Found" # si llego hasta aca es porque no se encontro el documento
+				resp = make_response('HTTP/1.1 200 OK',200)
+				resp.mimetype = "text"
+				return resp
+		resp = make_response('HTTP/1.1 404 Not Found',404)
+		resp.mimetype = "text"
+		return resp # si llego hasta aca es porque no se encontro el documento
 
 @app.route('/crear-doc/', methods=['GET', 'POST'])
 def crear_doc():
-	json_recibido = request.get_json()	
+	json_recibido = request.get_json()		
 	if json_recibido is not None:
 		titulo = json_recibido.get("titulo")
 		descripcion = json_recibido.get("descripcion")
 	if (json_recibido is None) or (titulo is None) or (descripcion is None):# si no se recibio el archivo json o los parametros titulo y descripcion son nulos , entonces devuelve error 400			
-		return "HTTP/1.1 400"
+		resp = make_response('HTTP/1.1 400',400)
+		resp.mimetype = "text"
+		return resp
 	credentials = get_credentials()
 	http = credentials.authorize(httplib2.Http())
 	service = discovery.build('drive', 'v3', http=http)	
@@ -52,12 +58,22 @@ def crear_doc():
 
 
 	file = service.files().create(body=file_metadata, # se crea el documento con los datos pasados por parametro
-                                    fields='id').execute()
-	
+                                    fields='id').execute()	
 	if file is None:
-		return "HTTP/1.1 500" 
+		resp = make_response("HTTP/1.1 500",500)
+		resp.mimetype = "text/xml"
+		return resp
+	rta = {
+		'HTTP Response': 'HTTP/1.1 200 OK',
+        'Id': file.get('id'),
+        'name': titulo,
+		'description':  descripcion,   
+		'mimeType': 'application/vnd.google-apps.document'
+	}
 	
-	return "HTTP/1.1 200 OK" + " id: %s propiedades: " % file.get('id') +  str(file_metadata)
+	resp = make_response(json.dumps(rta),200)
+	resp.mimetype = "aplication/json"
+	return resp
 
 @app.route('/oauth2callback')
 def oauth2callback():
