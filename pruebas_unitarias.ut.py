@@ -27,20 +27,18 @@ def prueba_crear_doc_con_parametros_mal():
 	return r
 
 class TestAPI(unittest.TestCase):
-	def setUp(self):
-		self.rta1 = prueba_buscar_palabra_satisfactoria()
-		self.rta2 = prueba_buscar_palabra_error()
-		self.rta3 = prueba_crear_doc_satisfactioria()
-		self.rta4 = prueba_crear_doc_con_parametros_mal()
-
 	def test_1(self):
+		self.rta1 = prueba_buscar_palabra_satisfactoria()
 		self.assertEqual(self.rta1.status_code, 200)
 	def test_2(self):
+		self.rta2 = prueba_buscar_palabra_error()
 		self.assertEqual(self.rta2.status_code, 404)
 	def test_3(self):
+		self.rta3 = prueba_crear_doc_satisfactioria()
 		self.assertEqual(self.rta3.status_code, 200)
 	def test_4(self):
+		self.rta4 = prueba_crear_doc_con_parametros_mal()
 		self.assertEqual(self.rta4.status_code, 400)
- 
+
 if __name__ == '__main__':
     unittest.main()
