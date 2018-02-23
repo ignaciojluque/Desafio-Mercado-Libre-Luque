@@ -56,5 +56,5 @@ Para poder ejecutar las pruebas unitarias es necesario instalar la librería req
 
 Luego ejecutando la siguiente linea en el terminal se verán los resultados de las pruebas:
 
-`python pruebas_unitarias.py`
+`python pruebas_unitarias.ut.py -v`
 
