@@ -10,7 +10,7 @@ Para ello se utiliza la api de Google drive. Para poder hacer uso de la misma se
 
 ## Requisitos previos
 
-* Tener python 2.7 o python 3
+* Tener python 2.7 
 * Tener una cuenta de Google Drive activa
 * Descargar pip: `sudo apt-get install python-pip` 
 * Descargar Flask: `sudo pip install Flask`
